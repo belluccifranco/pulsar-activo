@@ -1,5 +1,5 @@
 {
-  "name": "Pulsar Activo Manager",
+  "name": "pulsar-activo-manager",
   "version": "0.0.1",
   "description": "Pulsar Activo Events Manager",
   "main": "Gruntfile.js",
