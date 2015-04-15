@@ -1,3 +1,10 @@
 .idea/
 src/main/main.iml
 src/test/test.iml
+src/main/webapp/WEB-INF/dist/
+src/main/webapp/WEB-INF/node_modules/
+src/main/webapp/WEB-INF/src/app/css/application.min.css
+src/main/webapp/WEB-INF/src/app/fonts/
+src/main/webapp/WEB-INF/src/app/js/application.min.js
+src/main/webapp/WEB-INF/src/lib/
+src/main/webapp/WEB-INF/src/tmp/
