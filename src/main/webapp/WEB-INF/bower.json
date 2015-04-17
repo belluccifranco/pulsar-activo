@@ -1,10 +1,8 @@
 {
-  "name": "pulsar-activo-manager",
+  "name": "pulsar-activo",
   "version": "0.0.1",
-  "authors": [
-    "Facundo Sosa López <fssl2004@gmail.com>"
-  ],
-  "description": "Pulsar Activo Events Manager",
+  "authors": [],
+  "description": "Pulsar Activo",
   "private": true,
   "ignore": [
     "**/.*",
