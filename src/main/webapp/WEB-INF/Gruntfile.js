@@ -10,9 +10,11 @@ module.exports = function(grunt) {
         src: [
           'src/lib/jquery/dist/jquery.min.js',
           'src/lib/bootstrap/dist/js/bootstrap.min.js',
-          'src/lib/angular/angular.min.js'
+          'src/lib/angular/angular.min.js',
+          'src/lib/angular-route/angular-route.min.js',
+          'src/lib/angular-resource/angular-resource.min.js'
         ],
-        dest: 'src/tmp/thirdpartyscripts.min.js',
+        dest: 'src/tmp/thirdpartyscripts.min.js'
       },
       //Concats all js
       allJs: {
@@ -26,7 +28,7 @@ module.exports = function(grunt) {
       thirdPartyMinifiedCss: {
         src: [
           'src/lib/bootstrap/dist/css/bootstrap.min.css',
-          'src/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+          'src/lib/bootstrap/dist/css/bootstrap-theme.min.css'
         ],
         dest: 'src/tmp/thirdpartycss.min.css'
       },
@@ -34,7 +36,7 @@ module.exports = function(grunt) {
       allCss: {
         src: [
           'src/tmp/thirdpartycss.min.css',
-          'src/tmp/app.min.css',
+          'src/tmp/app.min.css'
         ],
         dest: 'src/app/css/application.min.css'
       }
@@ -66,8 +68,11 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options: {
+        livereload: true
+      },
       files: [
-        'src/app/**',
+        'src/app/**'
       ],
       tasks: [
         'concat:thirdParyMinifiedJs',
@@ -77,7 +82,7 @@ module.exports = function(grunt) {
         'concat:allJs',
         'concat:allCss',
         'copy'
-      ],
+      ]
     }
   });
 
