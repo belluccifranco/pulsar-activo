@@ -12,7 +12,9 @@ module.exports = function(grunt) {
           'src/lib/bootstrap/dist/js/bootstrap.min.js',
           'src/lib/angular/angular.min.js',
           'src/lib/angular-route/angular-route.min.js',
-          'src/lib/angular-resource/angular-resource.min.js'
+          'src/lib/angular-resource/angular-resource.min.js',
+          'src/lib/lodash/lodash.min.js',
+          'src/lib/angular-google-maps/dist/angular-google-maps.min.js'
         ],
         dest: 'src/tmp/thirdpartyscripts.min.js'
       },
@@ -42,6 +44,9 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
+      options: {
+        mangle: false
+      },
       slgeomin: {
         files: {
           'src/tmp/app.min.js': ['src/app/js/**/*.js', '!src/app/js/application.min.js']
@@ -50,7 +55,9 @@ module.exports = function(grunt) {
     },
     cssmin: {
       slgeomin: {
-        'src/tmp/app.min.css': ['src/app/css/**/*.css', '!src/app/css/application.min.css']
+        files: {
+          'src/tmp/app.min.css': ['src/app/css/**/*.css', '!src/app/css/application.min.css']
+        }
       }
     },
     copy: {
