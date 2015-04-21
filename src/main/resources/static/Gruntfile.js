@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'src/app/',
         src: ['**', '!js/**', '!css/**', 'js/application.min.js', 'css/application.min.css'],
-        dest: 'dist/'
+        dest: 'app/'
       }
     },
     watch: {
