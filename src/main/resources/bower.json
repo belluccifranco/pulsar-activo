@@ -21,5 +21,8 @@
     "angular-google-maps": "~2.0.19",
     "lodash": "~3.7.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "lodash": "~3.7.0"
+  }
 }

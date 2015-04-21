@@ -111,12 +111,13 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['watch']);
 
-  grunt.registerTask('setup', ['concat:thirdParyMinifiedJs',
+  grunt.registerTask('setup', [
+    'concat:thirdParyMinifiedJs',
     'concat:thirdPartyMinifiedCss',
     'uglify',
     'cssmin',
     'concat:allJs',
     'concat:allCss',
-    'copy']
-  );
+    'copy'
+  ]);
 };
