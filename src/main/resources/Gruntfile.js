@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'src/app/',
         src: ['**', '!js/**', '!css/**', 'js/application.min.js', 'css/application.min.css'],
-        dest: 'app/'
+        dest: 'static/'
       }
     },
     watch: {
@@ -111,4 +111,12 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['watch']);
 
+  grunt.registerTask('setup', ['concat:thirdParyMinifiedJs',
+    'concat:thirdPartyMinifiedCss',
+    'uglify',
+    'cssmin',
+    'concat:allJs',
+    'concat:allCss',
+    'copy']
+  );
 };

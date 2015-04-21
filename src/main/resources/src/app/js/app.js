@@ -11,7 +11,7 @@
         .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: 'app/templates/main.html',
+                    templateUrl: 'templates/main.html',
                     controller: 'mainController'
                 });
         }]);

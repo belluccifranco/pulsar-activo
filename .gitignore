@@ -6,6 +6,7 @@ nb-configuration.xml
 nbactions.xml
 src/main/main.iml
 src/test/test.iml
+pulsaractivo.iml
 src/main/resources/static/app/
 src/main/resources/static/node_modules/
 src/main/resources/static/src/app/css/application.min.css
