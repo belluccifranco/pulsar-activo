@@ -19,7 +19,21 @@
                 </button>
             </div>
             <div class="panel-body">
-                Dispositivos...
+                <ul class="list-unstyled">
+                    <li ng-repeat="group in groups">
+                        {{ group.name }}
+                        <ul>
+                            <li ng-repeat="fleet in group.fleets">
+                                {{ fleet.name }}
+                                <ul>
+                                    <li ng-repeat="device in fleet.devices">
+                                        {{ device.name }}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
