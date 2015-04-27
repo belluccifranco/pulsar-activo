@@ -14,5 +14,6 @@
                     templateUrl: 'templates/main.html',
                     controller: 'mainController'
                 });
+            $locationProvider.html5Mode(false).hashPrefix('!');
         }]);
 }());
