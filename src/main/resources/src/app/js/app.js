@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	angular.module('pulsarActivoManager', ['ngRoute', 'ngResource','uiGmapgoogle-maps'])
+	angular.module('pulsarActivo', ['ngRoute', 'ngResource','uiGmapgoogle-maps'])
         .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
             uiGmapGoogleMapApiProvider.configure({
                 //key: 'your api key',
@@ -12,7 +12,7 @@
             $routeProvider
                 .when('/', {
                     templateUrl: 'templates/main.html',
-                    controller: 'mainController'
+                    controller: 'MainController'
                 });
             $locationProvider.html5Mode(false).hashPrefix('!');
         }]);
