@@ -14,7 +14,8 @@ module.exports = function(grunt) {
           'src/lib/angular-route/angular-route.min.js',
           'src/lib/angular-resource/angular-resource.min.js',
           'src/lib/lodash/lodash.min.js',
-          'src/lib/angular-google-maps/dist/angular-google-maps.min.js'
+          'src/lib/angular-google-maps/dist/angular-google-maps.min.js',
+          'src/lib/angular-socket-io/socket.min.js'
         ],
         dest: 'src/tmp/thirdpartyscripts.min.js'
       },

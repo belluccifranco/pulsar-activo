@@ -62,9 +62,16 @@
 
 
     angular.module('pulsarActivo')
-        .controller('MainController', function($scope, uiGmapGoogleMapApi) {
+        .controller('MainController', function($scope, uiGmapGoogleMapApi, socket) {
             $scope.groups = groups;
         	$scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838 }, zoom: 13 };
+
+        	/*socket.on('echo', function(data) {
+        	    alert(data);
+        	});
+
+        	socket.emit('echo', 'hola');*/
+
         	uiGmapGoogleMapApi.then(function(maps) {
 
     		});
