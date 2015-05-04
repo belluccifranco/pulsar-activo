@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'uiGmapgoogle-maps'])
+    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'uiGmapgoogle-maps', 'btford.socket-io'])
         .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
             uiGmapGoogleMapApiProvider.configure({
                 //key: 'your api key',
@@ -19,5 +19,10 @@
                     controller: 'LoginController'
                 });
             $locationProvider.html5Mode(false).hashPrefix('!');
-        }]);
+        }])
+        .factory('socket', function (socketFactory) {
+            return socketFactory({
+                //ioSocket: io.connect('http://localhost:3000')
+            });
+        });
 }());
