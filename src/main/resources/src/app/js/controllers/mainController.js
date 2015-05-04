@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
 
     var devices = {
@@ -62,11 +62,16 @@
 
 
     angular.module('pulsarActivo')
-        .controller('MainController', function($scope, uiGmapGoogleMapApi) {
-            $scope.groups = groups;
-        	$scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838 }, zoom: 13 };
-        	uiGmapGoogleMapApi.then(function(maps) {
+        .controller('MainController', function ($scope, uiGmapGoogleMapApi, checkCreds ,$location) {
 
-    		});
+            /*if (!checkCreds()) {
+                $location.path('/login');
+            }*/
+
+            $scope.groups = groups;
+            $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
+            uiGmapGoogleMapApi.then(function (maps) {
+
+            });
         });
 }());

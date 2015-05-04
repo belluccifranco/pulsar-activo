@@ -1,18 +1,22 @@
 (function () {
-	'use strict';
-	angular.module('pulsarActivo', ['ngRoute', 'ngResource','uiGmapgoogle-maps'])
-        .config(['uiGmapGoogleMapApiProvider', function(uiGmapGoogleMapApiProvider) {
+    'use strict';
+
+    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'uiGmapgoogle-maps'])
+        .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
             uiGmapGoogleMapApiProvider.configure({
                 //key: 'your api key',
                 //v: '3.17',
                 libraries: 'weather,geometry,visualization'
             });
         }])
-        .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+        .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
                     templateUrl: 'templates/main.html',
                     controller: 'MainController'
+                }).when('/login', {
+                    templateUrl: 'templates/login.html',
+                    controller: 'LoginController'
                 });
             $locationProvider.html5Mode(false).hashPrefix('!');
         }]);
