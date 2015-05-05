@@ -1,7 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoogle-maps', 'btford.socket-io'])
+    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoogle-maps', /*'btford.socket-io'*/])
+        /*.factory('socket', function (socketFactory) {
+            return socketFactory({
+                ioSocket: io.connect('http://localhost:3000')
+            });
+        })*/
         .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
             uiGmapGoogleMapApiProvider.configure({
                 //key: 'your api key',
@@ -19,10 +24,5 @@
                     controller: 'LoginController'
                 });
             $locationProvider.html5Mode(false).hashPrefix('!');
-        }])
-        .factory('socket', function (socketFactory) {
-            return socketFactory({
-                //ioSocket: io.connect('http://localhost:3000')
-            });
-        });
+        }]);
 }());

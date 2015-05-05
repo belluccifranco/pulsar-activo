@@ -2,8 +2,7 @@
     'use strict';
 
     angular.module('pulsarActivo')
-        .controller('LoginController', ['$scope', '$location', 'LoginService', 'setCreds'],
-        function ($scope, $location, LoginService, setCreds) {
+        .controller('LoginController', function ($scope, $location, LoginService, setCreds) {
 
             $scope.submit = function () {
                 $scope.sub = true;
