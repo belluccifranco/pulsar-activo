@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'uiGmapgoogle-maps', 'btford.socket-io'])
+    angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoogle-maps', 'btford.socket-io'])
         .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
             uiGmapGoogleMapApiProvider.configure({
                 //key: 'your api key',

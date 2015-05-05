@@ -13,6 +13,7 @@ module.exports = function(grunt) {
           'src/lib/angular/angular.min.js',
           'src/lib/angular-route/angular-route.min.js',
           'src/lib/angular-resource/angular-resource.min.js',
+          'src/lib/angular-cookies/angular-cookies.min.js',
           'src/lib/lodash/lodash.min.js',
           'src/lib/angular-google-maps/dist/angular-google-maps.min.js',
           'src/lib/angular-socket-io/socket.min.js'
