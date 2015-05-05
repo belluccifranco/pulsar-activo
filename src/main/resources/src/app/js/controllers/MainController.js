@@ -62,9 +62,9 @@
 
 
     angular.module('pulsarActivo')
-        .controller('MainController', function ($scope, uiGmapGoogleMapApi, $location, checkCreds) {
+        .controller('MainController', function ($scope, uiGmapGoogleMapApi, $location, AuthService) {
 
-            if (!checkCreds()) {
+            if (!AuthService.checkCreds()) {
                 $location.path('/login');
             }
 
