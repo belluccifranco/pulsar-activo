@@ -62,7 +62,8 @@
 
 
     angular.module('pulsarActivo')
-        .controller('MainController', function ($scope, uiGmapGoogleMapApi, $location, AuthService) {
+        .controller('MainController', [ '$scope', 'uiGmapGoogleMapApi', '$location', 'AuthService',
+            function ($scope, uiGmapGoogleMapApi, $location, AuthService) {
 
             if (!AuthService.checkCreds()) {
                 $location.path('/login');
@@ -73,5 +74,5 @@
             uiGmapGoogleMapApi.then(function (maps) {
 
             });
-        });
+        }]);
 }());
