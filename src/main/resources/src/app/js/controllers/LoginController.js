@@ -5,31 +5,21 @@
         .controller('LoginController', ['$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
 
-                $scope.submit = function () {
-                    $scope.sub = true;
-                    var postData = {
-                        "username": $scope.username,
-                        "password": $scope.password
-                    };
+                $scope.credentials = {};
+                $scope.login = function () {
 
-                    AuthService.login({}, postData,
-                        function success(response) {
-                            console.log("Success:" + JSON.stringify(response));
-                            if (response.authenticated) {
-                                AuthService.setCreds($scope.username, $scope.password);
-                                $location.path('/');
-                            } else {
-                                $scope.error = "Login Failed"
-                            }
-
-                        },
-                        function error(errorResponse) {
-                            console.log("Error:" + JSON.stringify(errorResponse));
-                        }
-                    );
-
+                    AuthService.login($scope.credentials)
+                        .success(function () {
+                            console.log('LOGIN OK !!!');
+                            $scope.error = false;
+                            $location.path("/main");
+                        }).error(function () {
+                            console.log('REJECTED !!!');
+                            $scope.error = true;
+                            $location.path("/login");
+                        });
                 };
-
             }]);
 }());
+
 

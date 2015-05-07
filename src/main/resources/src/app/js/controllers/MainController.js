@@ -60,19 +60,13 @@
             }
         };
 
-
     angular.module('pulsarActivo')
-        .controller('MainController', [ '$scope', 'uiGmapGoogleMapApi', '$location', 'AuthService',
-            function ($scope, uiGmapGoogleMapApi, $location, AuthService) {
+        .controller('MainController', ['$scope', 'uiGmapGoogleMapApi',
+            function ($scope, uiGmapGoogleMapApi) {
+                $scope.groups = groups;
+                $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
+                uiGmapGoogleMapApi.then(function (maps) {
 
-            if (!AuthService.checkCreds()) {
-                $location.path('/login');
-            }
-
-            $scope.groups = groups;
-            $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
-            uiGmapGoogleMapApi.then(function (maps) {
-
-            });
-        }]);
+                });
+            }]);
 }());
