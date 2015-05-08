@@ -2,7 +2,9 @@ package com.pulsaractivo;
 
 import com.pulsaractivo.controller.SecurityConfiguration;
 import com.pulsaractivo.model.Customer;
+import com.pulsaractivo.model.Device;
 import com.pulsaractivo.repository.CustomerRepository;
+import com.pulsaractivo.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,9 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -65,5 +70,20 @@ public class Application implements CommandLineRunner {
         for (Customer bauer : customerRepository.findByLastName("Bauer")) {
             System.out.println(bauer);
         }
+
+        // save a couple of devices
+
+        deviceRepository.save(new Device("490154203237518", "Device1"));
+        deviceRepository.save(new Device("375235354514525", "Device2"));
+        deviceRepository.save(new Device("943202934893509", "Device3"));
+
+        // fetch all customers
+        System.out.println();
+        System.out.println("Devices found with findAll():");
+        System.out.println("-------------------------------");
+        for (Device device: deviceRepository.findAll()) {
+            System.out.println(device);
+        }
+        System.out.println();
     }
 }

@@ -1,40 +1,49 @@
 package com.pulsaractivo.model;
 
-import java.io.Serializable;
-import java.util.List;
-//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-//import javax.persistence.OneToMany;
-//import javax.validation.constraints.Pattern;
-//import org.hibernate.validator.constraints.Length;
-//import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Device.allDevices", query = "SELECT d FROM Device d"),
-    @NamedQuery(name = "Device.deviceById", query = "SELECT d FROM Device d WHERE d.id = :id")
+public class Device {
 
-})
-public class Device implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private String imei;
+    private String name;
 
-    public Device() {
+    protected Device() {
+    }
+
+    public Device(String imei, String name) {
+        this.imei = imei;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s [%s]", name, imei);
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
