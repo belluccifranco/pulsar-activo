@@ -72,7 +72,13 @@ module.exports = function(grunt) {
       main: {
         expand: true,
         cwd: 'src/app/',
-        src: ['**', '!js/**', '!css/**', 'js/application.min.js', 'css/application.min.css'],
+        src: [
+          '**',
+          //'!js/**',
+          //'!css/**',
+          //'js/application.min.js',
+          //'css/application.min.css'
+        ],
         dest: 'static/'
       }
     },
@@ -84,12 +90,12 @@ module.exports = function(grunt) {
         'src/app/**'
       ],
       tasks: [
-        'concat:thirdParyMinifiedJs',
-        'concat:thirdPartyMinifiedCss',
-        'uglify',
-        'cssmin',
-        'concat:allJs',
-        'concat:allCss',
+        //'concat:thirdParyMinifiedJs',
+        //'concat:thirdPartyMinifiedCss',
+        //'uglify',
+        //'cssmin',
+        //'concat:allJs',
+        //'concat:allCss',
         'copy'
       ]
     }
@@ -114,12 +120,12 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['watch']);
 
   grunt.registerTask('setup', [
-    'concat:thirdParyMinifiedJs',
-    'concat:thirdPartyMinifiedCss',
-    'uglify',
-    'cssmin',
-    'concat:allJs',
-    'concat:allCss',
+    //'concat:thirdParyMinifiedJs',
+    //'concat:thirdPartyMinifiedCss',
+    //'uglify',
+    //'cssmin',
+    //'concat:allJs',
+    //'concat:allCss',
     'copy'
   ]);
 };
