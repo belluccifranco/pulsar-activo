@@ -61,10 +61,21 @@
         };
 
     angular.module('pulsarActivo')
-        .controller('MainController', ['$scope', 'uiGmapGoogleMapApi',
-            function ($scope, uiGmapGoogleMapApi) {
+        .controller('MainController', ['$scope', 'uiGmapGoogleMapApi', 'Device',
+            function ($scope, uiGmapGoogleMapApi, Device) {
                 $scope.groups = groups;
                 $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
+
+                Device.get(
+                    { id: 1 },
+                    function success(response)	{
+                        console.log("Success:"	+	JSON.stringify(response));
+                    },
+                    function error(errorResponse)	{
+                        console.log("Error:" + JSON.stringify(errorResponse));
+                    }
+                );
+
                 uiGmapGoogleMapApi.then(function (maps) {
 
                 });
