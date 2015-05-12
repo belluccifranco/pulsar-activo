@@ -10,9 +10,8 @@ angular.module('pulsarActivo')
                         delete: {method: 'DELETE', cache: false, isArray: false}
                     });
                 },
-
-                getAll: function ($resource) {
-                    return $resource('/devices', {}, {
+                getAll: function () {
+                    return $resource('/devices/:page', {}, {
                         get: {method: 'GET', cache: false, isArray: false}
                     });
                 }

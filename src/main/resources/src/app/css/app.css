@@ -1,5 +1,12 @@
 .angular-google-map-container {
 	height: 400px;
 	width: 100%;
+}
 
+.remove-margin-bottom {
+	margin-bottom: 0;
+}
+
+.centro {
+	text-align: center;
 }

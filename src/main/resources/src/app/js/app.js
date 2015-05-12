@@ -4,6 +4,14 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
      ioSocket: io.connect('http://localhost:3000')
      });
      })*/
+    .filter('range', function() {
+      return function(input, total) {
+        total = parseInt(total);
+        for (var i=0; i<total; i++)
+          input.push(i);
+        return input;
+      };
+    })
     .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
             //key: 'your api key',
@@ -23,5 +31,8 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
             }).when('/login', {
                 templateUrl: 'templates/login.html',
                 controller: 'LoginController'
+            }).when('/devices/:page',{
+                templateUrl: 'templates/devices.html',
+                controller: 'DevicesController'
             });
     }]);
