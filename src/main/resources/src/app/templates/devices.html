@@ -1,0 +1,36 @@
+<h1>Devices</h1>
+<table class="table table-bordered table-condensed remove-margin-bottom">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>IMEI</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="device in devices">
+            <td>{{device.name}}</td>
+            <td>{{device.imei}}</td>
+            <td class="centro">
+                <a class="btn btn-default" href="#"><span class="glyphicon glyphicon-eye-open"></span> Show</a>
+                <a class="btn btn-default" href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<nav>
+    <ul class="pagination">
+        <li ng-class="{disabled: page<=1}">
+            <a href="#/devices/{{ (1 * page - 1) < 1 ? 1 : (1 * page - 1)}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li ng-class="{active: $index+1 == page}" ng-repeat="n in [] | range:totalPages"><a href="#/devices/{{$index+1}}">{{$index+1}}</a></li>
+        <li ng-class="{disabled: page>=totalPages}">
+            <a href="#/devices/{{ (1 * page + 1) > totalPages ? totalPages : (1 * page + 1) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
