@@ -1,25 +1,37 @@
-(function () {
-    'use strict';
+angular.module('pulsarActivo')
+    .controller('LoginController', ['$scope', '$location', 'AuthService', '$rootScope',
+        function ($scope, $location, AuthService, $rootScope) {
 
-    angular.module('pulsarActivo')
-        .controller('LoginController', ['$scope', '$location', 'AuthService',
-            function ($scope, $location, AuthService) {
+            //use $cookie instead
+            if ($rootScope.authenticated) {
+                $location.path("/main");
+            }
 
-                $scope.credentials = {};
-                $scope.login = function () {
+            $scope.credentials = {};
 
-                    AuthService.login($scope.credentials)
-                        .success(function () {
-                            console.log('LOGIN OK !!!');
-                            $scope.error = false;
-                            $location.path("/main");
-                        }).error(function () {
-                            console.log('REJECTED !!!');
-                            $scope.error = true;
-                            $location.path("/login");
-                        });
-                };
-            }]);
-}());
+            $scope.login = function () {
+                AuthService.login($scope.credentials, function () {
+                    if ($rootScope.authenticated) {
+                        $location.path("/main");
+                        $scope.error = false;
+                    } else {
+                        $location.path("/login");
+                        $scope.error = true;
+                    }
+                });
+            };
+
+            $scope.logout = function () {
+                AuthService.logout()
+                    .success(function () {
+                        $rootScope.authenticated = false;
+                        $location.path("/");
+                    }).error(function () {
+                        $rootScope.authenticated = false;
+                    });
+            };
+
+        }]);
+
 
 
