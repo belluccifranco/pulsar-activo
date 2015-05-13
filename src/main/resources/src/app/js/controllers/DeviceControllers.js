@@ -82,5 +82,11 @@
                         console.log("Error:" + JSON.stringify(errorResponse));
                     }
                 )
-            }]);
+            }
+        ])
+        .controller('newDeviceController', ['$scope', 'DeviceService',
+            function($scope, DeviceService) {
+
+            }
+        ]);
 }());

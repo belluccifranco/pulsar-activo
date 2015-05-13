@@ -31,8 +31,13 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
             }).when('/login', {
                 templateUrl: 'templates/login.html',
                 controller: 'LoginController'
-            }).when('/devices/:page',{
+            }).when('/devices', {
+                redirectTo: '/devices/1'
+            }).when('/devices/:page', {
                 templateUrl: 'templates/devices.html',
+                controller: 'DevicesController'
+            }).when('/device/new', {
+                templateUrl: 'templates/newDevice.html',
                 controller: 'DevicesController'
             });
     }]);
