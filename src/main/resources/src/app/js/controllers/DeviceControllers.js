@@ -66,9 +66,6 @@
                 var page = $routeParams.page || 1;
 
                 $scope.devices = [];
-                $scope.isCurrentPage = function(aPage) {
-                    return page === aPage;
-                }
 
                 DeviceService.getAll().get({ page: page},
                     function success(response) {
@@ -81,12 +78,21 @@
                     function error(errorResponse) {
                         console.log("Error:" + JSON.stringify(errorResponse));
                     }
-                )
+                );
             }
         ])
-        .controller('newDeviceController', ['$scope', 'DeviceService',
-            function($scope, DeviceService) {
+        .controller('newDeviceController', ['$scope',
+            function($scope) {
+                $scope.formData = {
+                    name: '',
+                    imei: ''
+                }
 
+                $scope.save = function () {
+                    console.log($scope.form);
+                    console.log($scope.formData);
+                }
             }
         ]);
+
 }());

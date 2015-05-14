@@ -38,6 +38,6 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
                 controller: 'DevicesController'
             }).when('/device/new', {
                 templateUrl: 'templates/newDevice.html',
-                controller: 'DevicesController'
+                controller: 'newDeviceController'
             });
     }]);
