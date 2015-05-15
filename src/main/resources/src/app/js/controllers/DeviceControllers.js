@@ -89,6 +89,11 @@
                 }
 
                 $scope.save = function () {
+                    if ($scope.form.$invalid) {
+                        $scope.$broadcast('record:invalid');
+                    } else {
+                        //Save to server
+                    }
                     console.log($scope.form);
                     console.log($scope.formData);
                 }
