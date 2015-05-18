@@ -4,13 +4,13 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
      ioSocket: io.connect('http://localhost:3000')
      });
      })*/
-    .filter('range', function() {
-      return function(input, total) {
-        total = parseInt(total);
-        for (var i=0; i<total; i++)
-          input.push(i);
-        return input;
-      };
+    .filter('range', function () {
+        return function (input, total) {
+            total = parseInt(total);
+            for (var i = 0; i < total; i++)
+                input.push(i);
+            return input;
+        };
     })
     .config(['uiGmapGoogleMapApiProvider', function (uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
@@ -20,7 +20,6 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
         });
     }])
     .config(['$routeProvider', function ($routeProvider) {
-        //ask for credentials using resolve for each route
         $routeProvider
             .when('/', {
                 redirectTo: '/login'
@@ -40,4 +39,15 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
                 templateUrl: 'templates/newDevice.html',
                 controller: 'newDeviceController'
             });
-    }]);
+    }])
+    .run(function ($rootScope, $location, AuthService) {
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+
+            if (AuthService.checkCredential() === false) {
+                if (next.templateUrl === "/templates/login.html") {
+                } else {
+                    $location.path("/login");
+                }
+            }
+        });
+    });
