@@ -9,15 +9,22 @@ angular.module('pulsarActivo')
             $scope.credentials = {};
 
             $scope.login = function () {
-                AuthService.login($scope.credentials, function () {
-                    if (AuthService.checkCredential()) {
-                        $location.path("/main");
-                        $scope.error = false;
-                    } else {
-                        $location.path("/login");
+                AuthService.login($scope.credentials)
+                    .success(function (data) {
+                        if (data.name) {
+                            AuthService.setCredential($scope.credentials.username, $scope.credentials.password);
+                            $scope.error = false;
+                            $location.path("/main");
+                        } else {
+                            AuthService.deleteCredential();
+                            $scope.error = true;
+                            $location.path("/login");
+                        }
+                    }).error(function () {
+                        AuthService.deleteCredential();
                         $scope.error = true;
-                    }
-                });
+                        $location.path("/login");
+                    });
             };
 
             $scope.logout = function () {

@@ -2,26 +2,11 @@ angular.module('pulsarActivo')
     .factory('AuthService', ['$http', '$cookies',
         function ($http, $cookies) {
             return {
-                login: function (credentials, callback) {
-                    var me = this;
+                login: function (credentials) {
                     var headers = credentials ? {
                         authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)
                     } : {};
-
-                    $http.get('/user', {headers: headers})
-                        .success(function (data) {
-                            console.log("Entered in success");
-                            if (data.name) {
-                                me.setCredential(credentials.username, credentials.password);
-                            } else {
-                                me.deleteCredential();
-                            }
-                            callback && callback();
-                        }).error(function () {
-                            console.log("Entered in error");
-                            me.deleteCredential();
-                            callback && callback();
-                        });
+                    return $http.get('/user', {headers: headers});
                 },
 
                 logout: function () {
