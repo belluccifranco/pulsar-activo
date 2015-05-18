@@ -42,12 +42,14 @@ angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoo
     }])
     .run(function ($rootScope, $location, AuthService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-
             if (AuthService.checkCredential() === false) {
+                $rootScope.showMenu = false;
                 if (next.templateUrl === "/templates/login.html") {
                 } else {
                     $location.path("/login");
                 }
+            } else {
+                $rootScope.showMenu = true;
             }
         });
     });

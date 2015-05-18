@@ -25,14 +25,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .and()
-                .authorizeRequests().antMatchers("/", "/templates/login.html").permitAll()
-                .anyRequest().authenticated()
-                .and().logout().logoutSuccessUrl("/")
-                .and().csrf()
-                .csrfTokenRepository(csrfTokenRepository())
-                .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+            .httpBasic()
+            .and()
+            .authorizeRequests().antMatchers(
+                "/", "/templates/login.html", "/templates/menu.html", "/fonts/*.*"
+            ).permitAll()
+            .anyRequest().authenticated()
+            .and().logout().logoutSuccessUrl("/")
+            .and().csrf()
+            .csrfTokenRepository(csrfTokenRepository())
+            .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
     }
 
     private Filter csrfHeaderFilter() {
