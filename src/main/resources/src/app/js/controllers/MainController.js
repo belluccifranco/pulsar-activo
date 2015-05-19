@@ -66,15 +66,6 @@
                 $scope.groups = groups;
                 $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
 
-                DeviceService.get({id: 1},
-                    function success(response) {
-                        console.log("Success:" + JSON.stringify(response));
-                    },
-                    function error(errorResponse) {
-                        console.log("Error:" + JSON.stringify(errorResponse));
-                    }
-                );
-
                 uiGmapGoogleMapApi.then(function (maps) {
 
                 });

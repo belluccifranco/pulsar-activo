@@ -1,10 +1,10 @@
 <h1>New Device</h1>
 
-<form name="form" novalidate class="well">
+<form name="form" novalidate class="well" ng-submit="save()">
     <b3-input-form-field record="formData" field="name" required="true"></b3-input-form-field>
-    <b3-input-form-field record="formData" field="imei" required="false"></b3-input-form-field>
+    <b3-input-form-field record="formData" field="imei" required="true"></b3-input-form-field>
     <p class="text-right remove-margin-bottom">
-        <button type="button" class="btn btn-primary" ng-click="save()">
+        <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> Guardar
         </button>
     </p>

@@ -81,21 +81,20 @@
                 );
             }
         ])
-        .controller('newDeviceController', ['$scope',
-            function($scope) {
-                $scope.formData = {
+        .controller('newDeviceController', ['$scope', 'DeviceService', '$location',
+            function($scope, DeviceService, $location) {
+                $scope.formData = new DeviceService({
                     name: '',
                     imei: ''
-                }
+                });
 
                 $scope.save = function () {
                     if ($scope.form.$invalid) {
                         $scope.$broadcast('record:invalid');
                     } else {
-                        //Save to server
+                        $scope.formData.$save();
+                        $location.path('/devices/1');
                     }
-                    console.log($scope.form);
-                    console.log($scope.formData);
                 }
             }
         ]);

@@ -1,8 +1,7 @@
 <div class="form-group" ng-form="{{field}}" ng-class="{ 'has-error': {{field}}.$dirty && {{field}}.$invalid }">
-    <label>{{field}} <span ng-if="required" class="glyphicon glyphicon-asterisk"></span></label>
+    <label>{{field}} <span ng-if="required === 'true'" class="glyphicon glyphicon-asterisk"></span></label>
     <div class="alert alert-danger" ng-show="{{field}}.$dirty && {{field}}.$invalid">
         This field is required.
     </div>
-    <input ng-if="required" type="{{type||'text'}}" ng-model="record[field]" class="form-control" required>
-    <input ng-if="!required" type="{{type||'text'}}" ng-model="record[field]" class="form-control" >
+    <input ng-required="{{required}}" type="{{type||'text'}}" ng-model="record[field]" class="form-control">
 </div>

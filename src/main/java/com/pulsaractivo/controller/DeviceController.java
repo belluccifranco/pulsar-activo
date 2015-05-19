@@ -1,5 +1,6 @@
 package com.pulsaractivo.controller;
 
+import javax.validation.Valid;
 import com.pulsaractivo.model.Device;
 import com.pulsaractivo.service.DeviceService;
 import com.pulsaractivo.repository.DeviceRepository;
@@ -30,5 +31,11 @@ public class DeviceController {
     @ResponseStatus(HttpStatus.OK)
     public Device findById(@PathVariable long id) {
         return deviceRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/device", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public Device save(@RequestBody @Valid Device device) {
+        return deviceRepository.save(device);
     }
 }
