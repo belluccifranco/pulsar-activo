@@ -30,7 +30,12 @@ public class DeviceController {
     @RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Device findById(@PathVariable long id) {
-        return deviceRepository.findById(id);
+        Device device = deviceRepository.findOne(id);
+        if (device == null) {
+            //throw error entity not found.
+        }
+        System.out.println(device);
+        return device;
     }
 
     @RequestMapping(value = "/device", method = RequestMethod.POST)

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var devices = {
+    /*var devices = {
             1: {
                 id: 1,
                 name: 'Caminante 01'
@@ -58,7 +58,7 @@
                 name: 'Municipalidad de Resistencia',
                 fleets: [fleets[2]]
             }
-        };
+        }; */
 
     angular.module('pulsarActivo')
         .controller('DevicesController', ['$scope', '$routeParams', 'DeviceService',
@@ -67,13 +67,13 @@
 
                 $scope.devices = [];
 
-                DeviceService.list({ page: page},
+                DeviceService.list(
+                    { page: page},
                     function success(response) {
                         console.log("Success:" + JSON.stringify(response));
                         $scope.devices = response.content;
                         $scope.page = page;
                         $scope.totalPages = response.totalPages;
-
                     },
                     function error(errorResponse) {
                         console.log("Error:" + JSON.stringify(errorResponse));
@@ -83,6 +83,61 @@
         ])
         .controller('newDeviceController', ['$scope', 'DeviceService', '$location',
             function($scope, DeviceService, $location) {
+                var entity = new DeviceService({
+                        name: '',
+                        imei: ''
+                    });
+
+                $scope.action = 'New';
+                $scope.formData = entity;
+
+                $scope.save = function () {
+                    if ($scope.form.$invalid) {
+                        $scope.$broadcast('record:invalid');
+                    } else {
+                        $scope.formData.$save(
+                            function (response) {
+                                $location.path('/devices/1');
+                            },
+                            function(errorResponse) {
+                                console.log($errorResponse);
+                            }
+                        );
+                    }
+                }
+            }
+        ]).controller('editDeviceController', ['$scope', '$routeParams', 'DeviceService', '$location',
+            function($scope, $routeParams, DeviceService, $location) {
+                var id = $routeParams.id;
+                $scope.action = 'Edit';
+
+                DeviceService.get(
+                    { id: id },
+                    function (response) {
+                        console.log(response);
+                        $scope.formData = response;
+                    },
+                    function (errorResponse) {
+                        console.log("Error:" + JSON.stringify(errorResponse));
+                    }
+                )
+
+                $scope.save = function () {
+                    if ($scope.form.$invalid) {
+                        $scope.$broadcast('record:invalid');
+                    } else {
+                        $scope.formData.$save(
+                            function (response) {
+                                $location.path('/devices/1');
+                            },
+                            function(errorResponse) {
+                                console.log($errorResponse);
+                            }
+                        );
+                    }
+                }
+
+                /*$scope.action = 'New';
                 $scope.formData = new DeviceService({
                     name: '',
                     imei: ''
@@ -95,7 +150,7 @@
                         $scope.formData.$save();
                         $location.path('/devices/1');
                     }
-                }
+                }*/
             }
         ]);
 
