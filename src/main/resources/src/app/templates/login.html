@@ -4,14 +4,19 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
         <form ng-submit="login()" class="well">
-            <h2 class="text-center">Pulsar Activo - Ingreso</h2>
-            <div class="control-group">
-                <label for="username">Username:</label>
-                <input class="form-control" type="text" id="username" ng-model="credentials.username"/>
+            <h1 class="text-center"><span class="glyphicon glyphicon-log-in"></span> Pulsar Activo</h1>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <input class="form-control" type="text" id="username" placeholder="Username" ng-model="credentials.username"/>
             </div>
-            <div class="control-group">
-                <label for="password">Password:</label>
-                <input class="form-control" type="password" id="password" ng-model="credentials.password"/>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-asterisk"></span>
+                </span>
+                <input class="form-control" type="password" id="password" placeholder="Password" ng-model="credentials.password"/>
             </div>
             <br>
             <div class="row">

@@ -36,7 +36,6 @@ angular.module('pulsarActivo')
                         AuthService.deleteCredential();
                     });
             };
-
         }]);
 
 

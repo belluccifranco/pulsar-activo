@@ -120,7 +120,7 @@
                     function (errorResponse) {
                         console.log("Error:" + JSON.stringify(errorResponse));
                     }
-                )
+                );
 
                 $scope.save = function () {
                     if ($scope.form.$invalid) {
@@ -136,21 +136,21 @@
                         );
                     }
                 }
+            }
+        ]).controller('showDeviceController', ['$scope', '$routeParams', 'DeviceService',
+            function($scope, $routeParams, DeviceService) {
+                var id = $routeParams.id;
 
-                /*$scope.action = 'New';
-                $scope.formData = new DeviceService({
-                    name: '',
-                    imei: ''
-                });
-
-                $scope.save = function () {
-                    if ($scope.form.$invalid) {
-                        $scope.$broadcast('record:invalid');
-                    } else {
-                        $scope.formData.$save();
-                        $location.path('/devices/1');
+                DeviceService.get(
+                    { id: id },
+                    function (response) {
+                        console.log(response);
+                        $scope.device = response;
+                    },
+                    function (errorResponse) {
+                        console.log("Error:" + JSON.stringify(errorResponse));
                     }
-                }*/
+                );
             }
         ]);
 

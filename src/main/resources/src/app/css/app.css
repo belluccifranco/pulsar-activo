@@ -7,6 +7,16 @@
 	margin-bottom: 0;
 }
 
-.centro {
-	text-align: center;
+th.show-header {
+    text-align: right;
+    width: 30%;
+}
+
+.logo {
+    width: 117px;
+    /*background-color: white;*/
+    background-image: url(../images/logo.png);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
