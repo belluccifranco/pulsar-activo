@@ -19,9 +19,9 @@ public class DeviceServiceImpl implements DeviceService {
     private DeviceRepository deviceRepository;
 
     @Override
-    public Page<Device> getDevices(Integer pageNumber) {
+    public Page<Device> getDevices(Integer page) {
         PageRequest pageRequest =
-                new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.DESC, "name");
+                new PageRequest(page - 1, PAGE_SIZE, Sort.Direction.DESC, "name");
         return deviceRepository.findAll(pageRequest);
     }
 }

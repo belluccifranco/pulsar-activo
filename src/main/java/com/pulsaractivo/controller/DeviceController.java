@@ -21,13 +21,13 @@ public class DeviceController {
         this.deviceRepository = deviceRepository;
     }
 
-    @RequestMapping(value = "/devices/{pageNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/devices", method = RequestMethod.GET, params={"page"})
     @ResponseStatus(HttpStatus.OK)
-    public Page<Device> searchAll(@PathVariable Integer pageNumber) {
-        return deviceService.getDevices(pageNumber);
+    public Page<Device> searchAll(@RequestParam(value = "page", defaultValue = "1") int page) {
+        return deviceService.getDevices(page);
     }
 
-    @RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/devices/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Device findById(@PathVariable long id) {
         Device device = deviceRepository.findOne(id);
@@ -38,7 +38,7 @@ public class DeviceController {
         return device;
     }
 
-    @RequestMapping(value = "/device", method = RequestMethod.POST)
+    @RequestMapping(value = "/devices", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public Device save(@RequestBody @Valid Device device) {
         return deviceRepository.save(device);

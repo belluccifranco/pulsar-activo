@@ -5,5 +5,5 @@ import org.springframework.data.domain.Page;
 
 public interface DeviceService {
 
-    Page<Device> getDevices(Integer pageNumber);
+    Page<Device> getDevices(Integer page);
 }
