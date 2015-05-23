@@ -88,7 +88,7 @@
                         imei: ''
                     });
 
-                $scope.action = 'New';
+                $scope.action = 'Nuevo';
                 $scope.formData = entity;
 
                 $scope.save = function () {
@@ -109,7 +109,7 @@
         ]).controller('editDeviceController', ['$scope', '$routeParams', 'DeviceService', '$location',
             function($scope, $routeParams, DeviceService, $location) {
                 var id = $routeParams.id;
-                $scope.action = 'Edit';
+                $scope.action = 'Editar';
 
                 DeviceService.get(
                     { id: id },

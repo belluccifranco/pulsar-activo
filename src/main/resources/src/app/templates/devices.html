@@ -1,14 +1,14 @@
-<h1>Devices</h1>
+<h1>Dispositivos</h1>
 
 <ul class="list-inline pull-right">
-    <li><a href="#/device/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Device</a></li>
+    <li><a href="#/device/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nuevo Dispositivo</a></li>
 </ul>
 <table class="table table-bordered table-condensed remove-margin-bottom">
     <thead>
     <tr>
-        <th>Name</th>
+        <th>Nombre</th>
         <th>IMEI</th>
-        <th></th>
+        <th class="text-center">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -16,8 +16,8 @@
         <td>{{device.name}}</td>
         <td>{{device.imei}}</td>
         <td class="text-center">
-            <a class="btn btn-default" href="#/device/{{device.id}}/show"><span class="glyphicon glyphicon-eye-open"></span> Show</a>
-            <a class="btn btn-default" href="#/device/{{device.id}}/edit"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+            <a class="btn btn-default" href="#/device/{{device.id}}/show"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+            <a class="btn btn-default" href="#/device/{{device.id}}/edit"><span class="glyphicon glyphicon-edit"></span> Editar</a>
         </td>
     </tr>
     </tbody>
@@ -26,13 +26,13 @@
 <nav>
     <ul class="pagination">
         <li ng-class="{disabled: page<=1}">
-            <a href="#/devices/{{ (1 * page - 1) < 1 ? 1 : (1 * page - 1)}}" aria-label="Previous">
+            <a href="#/devices/{{ (1 * page - 1) < 1 ? 1 : (1 * page - 1)}}" aria-label="Anterior">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li ng-class="{active: $index+1 == page}" ng-repeat="n in [] | range:totalPages"><a href="#/devices/{{$index+1}}">{{$index+1}}</a></li>
         <li ng-class="{disabled: page>=totalPages}">
-            <a href="#/devices/{{ (1 * page + 1) > totalPages ? totalPages : (1 * page + 1) }}" aria-label="Next">
+            <a href="#/devices/{{ (1 * page + 1) > totalPages ? totalPages : (1 * page + 1) }}" aria-label="Siguiente">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

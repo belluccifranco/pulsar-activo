@@ -7,6 +7,7 @@ angular.module('pulsarActivo')
             scope: {
                 record: '=',
                 field: '@',
+                label: '@',
                 type: '@',
                 required: '@'
             },

@@ -1,8 +1,8 @@
-<h1>{{action}} Device</h1>
+<h1>{{action}} Dispositivo</h1>
 
 <form name="form" novalidate class="well" ng-submit="save()">
-    <b3-input-form-field record="formData" field="name" required="true"></b3-input-form-field>
-    <b3-input-form-field record="formData" field="imei" required="true"></b3-input-form-field>
+    <b3-input-form-field label="Nombre" record="formData" field="name" required="true"></b3-input-form-field>
+    <b3-input-form-field label="Imei" record="formData" field="imei" required="true"></b3-input-form-field>
     <p class="text-right remove-margin-bottom">
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> Guardar
@@ -13,7 +13,7 @@
 <ul class="list-inline">
     <li>
         <a class="btn btn-default" href="#/devices/1">
-            <span class="glyphicon glyphicon-arrow-left"></span> Back to List
+            <span class="glyphicon glyphicon-arrow-left"></span> Volver a la lista
         </a>
     </li>
 </ul>
