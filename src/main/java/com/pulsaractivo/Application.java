@@ -1,8 +1,10 @@
 package com.pulsaractivo;
 
-import com.pulsaractivo.controller.SecurityConfiguration;
 import com.pulsaractivo.model.Device;
+import com.pulsaractivo.model.UserAccount;
+import com.pulsaractivo.model.UserRole;
 import com.pulsaractivo.repository.DeviceRepository;
+import com.pulsaractivo.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,12 +13,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Autowired
+    private UserAccountRepository userAccountRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -42,7 +49,6 @@ public class Application implements CommandLineRunner {
         deviceRepository.save(new Device("375235354514525", "Device2"));
         deviceRepository.save(new Device("943202934893509", "Device3"));
 
-        // fetch all customers
         System.out.println();
         System.out.println("Devices found with findAll():");
         System.out.println("-------------------------------");
@@ -50,5 +56,19 @@ public class Application implements CommandLineRunner {
             System.out.println(device);
         }
         System.out.println();
+
+
+        //save a new userAccount and a new Role
+        UserRole ADMIN_ROLE = new UserRole("ADMIN_ROLE");
+        List<UserRole> roles = new ArrayList();
+        roles.add(ADMIN_ROLE);
+        UserAccount userAccount = new UserAccount("admin@admin.com", "admin", "admin", roles);
+        List<UserAccount> accounts = new ArrayList();
+        accounts.add(userAccount);
+        ADMIN_ROLE.setUserAccounts(accounts);
+        userAccountRepository.save(userAccount);
+
+        System.out.println(userAccount);
+        System.out.println(ADMIN_ROLE);
     }
 }
