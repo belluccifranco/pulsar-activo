@@ -3,6 +3,22 @@
 <form name="form" novalidate class="well" ng-submit="save()">
     <b3-input-form-field label="Nombre" record="formData" field="name" required="true"></b3-input-form-field>
     <b3-input-form-field label="Imei" record="formData" field="imei" required="true"></b3-input-form-field>
+    <b3-input-form-field label="Número de Teléfono" record="formData" field="phoneNumber" required="true"></b3-input-form-field>
+    <div class="form-group">
+        <label for="type">Tipo de Dispositivo <span class="glyphicon glyphicon-asterisk"></span></label>
+        <select id="type" ng-model="formData.type" class="form-control">
+            <option value="PB">Botón Pulsar</option>
+            <option value="AVL">AVL</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="providerType">Tipo Proveedor <span class="glyphicon glyphicon-asterisk"></span></label>
+        <select id="providerType" ng-model="formData.providerType" class="form-control">
+            <option value="C">C</option>
+            <option value="P">P</option>
+            <option value="M">ML</option>
+        </select>
+    </div>
     <p class="text-right remove-margin-bottom">
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok"></span> Guardar

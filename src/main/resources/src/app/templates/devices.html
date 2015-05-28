@@ -8,6 +8,7 @@
     <tr>
         <th>Nombre</th>
         <th>IMEI</th>
+        <th>Tipo</th>
         <th class="text-center">Acciones</th>
     </tr>
     </thead>
@@ -15,6 +16,7 @@
     <tr ng-repeat="device in devices">
         <td>{{device.name}}</td>
         <td>{{device.imei}}</td>
+        <td>{{device.type}}</td>
         <td class="text-center">
             <a class="btn btn-default" href="#/device/{{device.id}}/show"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
             <a class="btn btn-default" href="#/device/{{device.id}}/edit"><span class="glyphicon glyphicon-edit"></span> Editar</a>

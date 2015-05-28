@@ -1,9 +1,11 @@
 package com.pulsaractivo;
 
 import com.pulsaractivo.model.Device;
+import com.pulsaractivo.model.Person;
 import com.pulsaractivo.model.UserAccount;
 import com.pulsaractivo.model.UserRole;
 import com.pulsaractivo.repository.DeviceRepository;
+import com.pulsaractivo.repository.PersonRepository;
 import com.pulsaractivo.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +23,9 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -54,6 +59,19 @@ public class Application implements CommandLineRunner {
         System.out.println("-------------------------------");
         for (Device device: deviceRepository.findAll()) {
             System.out.println(device);
+        }
+        System.out.println();
+
+        // save a couple of persons
+        personRepository.save(new Person("Franco", "24879316"));
+        personRepository.save(new Person("Dario", "21365479"));
+        personRepository.save(new Person("Facundo", "20547891"));
+
+        System.out.println();
+        System.out.println("Persons found with findAll():");
+        System.out.println("-------------------------------");
+        for (Person person: personRepository.findAll()) {
+            System.out.println(person);
         }
         System.out.println();
 

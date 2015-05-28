@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import com.pulsaractivo.model.DeviceType;
+import com.pulsaractivo.model.ProviderType;
 
 @Entity
 public class Device {
@@ -13,6 +17,11 @@ public class Device {
     private long id;
     private String imei;
     private String name;
+    private String phoneNumber;
+    @Enumerated(EnumType.STRING)
+    private DeviceType type;
+    @Enumerated(EnumType.STRING)
+    private ProviderType providerType;
 
     protected Device() {
     }
@@ -45,5 +54,29 @@ public class Device {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public DeviceType getType() {
+        return type;
+    }
+
+    public void setType(DeviceType type) {
+        this.type = type;
+    }
+
+    public ProviderType getProviderType() {
+        return providerType;
+    }
+
+    public void setProviderType(ProviderType providerType) {
+        this.providerType = providerType;
     }
 }
