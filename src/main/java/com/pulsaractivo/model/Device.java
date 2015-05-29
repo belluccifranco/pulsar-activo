@@ -1,5 +1,6 @@
 package com.pulsaractivo.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import com.pulsaractivo.model.DeviceType;
 import com.pulsaractivo.model.ProviderType;
 
 @Entity
-public class Device {
+public class Device implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +27,10 @@ public class Device {
     protected Device() {
     }
 
-    public Device(String imei, String name) {
+    public Device(String imei, String name, DeviceType type) {
         this.imei = imei;
         this.name = name;
+        this.type = type;
     }
 
     @Override

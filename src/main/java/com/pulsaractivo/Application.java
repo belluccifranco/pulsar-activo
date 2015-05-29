@@ -1,11 +1,8 @@
 package com.pulsaractivo;
 
-import com.pulsaractivo.model.Device;
-import com.pulsaractivo.model.Person;
-import com.pulsaractivo.model.UserAccount;
-import com.pulsaractivo.model.UserRole;
+import com.pulsaractivo.model.*;
 import com.pulsaractivo.repository.DeviceRepository;
-import com.pulsaractivo.repository.PersonRepository;
+import com.pulsaractivo.repository.DispatcherRepository;
 import com.pulsaractivo.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +22,7 @@ public class Application implements CommandLineRunner {
     private DeviceRepository deviceRepository;
 
     @Autowired
-    private PersonRepository personRepository;
+    private DispatcherRepository dispatcherRepository;
 
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -50,7 +47,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         // save a couple of persons
-        addSomePersons();
+        addSomeDispatchers();
 
         // save a couple of devices
         addSomeDevices();
@@ -60,9 +57,9 @@ public class Application implements CommandLineRunner {
     }
 
     private void addSomeDevices() {
-        deviceRepository.save(new Device("490154203237518", "Device1"));
-        deviceRepository.save(new Device("375235354514525", "Device2"));
-        deviceRepository.save(new Device("943202934893509", "Device3"));
+        deviceRepository.save(new Device("490154203237518", "Device1", DeviceType.PANICBUTTON));
+        deviceRepository.save(new Device("375235354514525", "Device2", DeviceType.AVL));
+        deviceRepository.save(new Device("943202934893509", "Device3", DeviceType.PANICBUTTON));
 
         System.out.println();
         System.out.println("Devices found with findAll():");
@@ -73,16 +70,16 @@ public class Application implements CommandLineRunner {
         System.out.println();
     }
 
-    private void addSomePersons() {
-        personRepository.save(new Person("Franco", "24879316"));
-        personRepository.save(new Person("Dario", "21365479"));
-        personRepository.save(new Person("Facundo", "20547891"));
+    private void addSomeDispatchers() {
+        dispatcherRepository.save(new Dispatcher("Franco", "24879316"));
+        dispatcherRepository.save(new Dispatcher("Dario", "21365479"));
+        dispatcherRepository.save(new Dispatcher("Facundo", "20547891"));
 
         System.out.println();
-        System.out.println("Persons found with findAll():");
+        System.out.println("Dispatchers found with findAll():");
         System.out.println("-------------------------------");
-        for (Person person: personRepository.findAll()) {
-            System.out.println(person);
+        for (Dispatcher dispatcher: dispatcherRepository.findAll()) {
+            System.out.println(dispatcher);
         }
         System.out.println();
     }

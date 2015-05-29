@@ -85,7 +85,9 @@
             function($scope, DeviceService, $location) {
                 var entity = new DeviceService({
                         name: '',
-                        imei: ''
+                        imei: '',
+                        type: 'PANICBUTTON',
+                        providerType: 'PERSONAL'
                     });
 
                 $scope.action = 'Nuevo';
