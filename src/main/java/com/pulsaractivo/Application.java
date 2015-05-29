@@ -49,7 +49,17 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        // save a couple of persons
+        addSomePersons();
+
         // save a couple of devices
+        addSomeDevices();
+
+        //save a new userAccount and a new Role
+        addSomeUserAccountsAndRoles();
+    }
+
+    private void addSomeDevices() {
         deviceRepository.save(new Device("490154203237518", "Device1"));
         deviceRepository.save(new Device("375235354514525", "Device2"));
         deviceRepository.save(new Device("943202934893509", "Device3"));
@@ -61,8 +71,9 @@ public class Application implements CommandLineRunner {
             System.out.println(device);
         }
         System.out.println();
+    }
 
-        // save a couple of persons
+    private void addSomePersons() {
         personRepository.save(new Person("Franco", "24879316"));
         personRepository.save(new Person("Dario", "21365479"));
         personRepository.save(new Person("Facundo", "20547891"));
@@ -74,9 +85,9 @@ public class Application implements CommandLineRunner {
             System.out.println(person);
         }
         System.out.println();
+    }
 
-
-        //save a new userAccount and a new Role
+    private void addSomeUserAccountsAndRoles() {
         UserRole ADMIN_ROLE = new UserRole("ADMIN_ROLE");
         List<UserRole> roles = new ArrayList();
         roles.add(ADMIN_ROLE);
