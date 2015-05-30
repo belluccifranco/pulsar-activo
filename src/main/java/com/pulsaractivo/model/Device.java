@@ -1,14 +1,22 @@
 package com.pulsaractivo.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
 import com.pulsaractivo.model.DeviceType;
 import com.pulsaractivo.model.ProviderType;
+import com.pulsaractivo.model.Event;
+import com.pulsaractivo.model.Client;
 
 @Entity
 public class Device implements Serializable {
@@ -19,18 +27,29 @@ public class Device implements Serializable {
     private String imei;
     private String name;
     private String phoneNumber;
+
     @Enumerated(EnumType.STRING)
     private DeviceType type;
+
     @Enumerated(EnumType.STRING)
     private ProviderType providerType;
 
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "device")
+    private List<Event> events;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_client", referencedColumnName = "id")
+    private Client client;
+
     protected Device() {
+        this.events = new ArrayList<Event>();
     }
 
     public Device(String imei, String name, DeviceType type) {
         this.imei = imei;
         this.name = name;
         this.type = type;
+        this.events = new ArrayList<Event>();
     }
 
     @Override
@@ -80,5 +99,21 @@ public class Device implements Serializable {
 
     public void setProviderType(ProviderType providerType) {
         this.providerType = providerType;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

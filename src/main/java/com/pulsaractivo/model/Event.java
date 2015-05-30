@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
+import com.pulsaractivo.model.Device;
 import com.pulsaractivo.model.EventType;
 import java.time.LocalDate;
 
@@ -29,10 +30,15 @@ public class Event implements Serializable {
     @JoinColumn(name = "id_dispatcher", referencedColumnName = "id")
     private Dispatcher dispatcher;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_device", referencedColumnName = "id", nullable = false)
+    private Device device;
+
     protected Event() {
     }
 
-    public Event(LocalDate dateTime, EventType type, double lat, double lng) {
+    public Event(Device device, LocalDate dateTime, EventType type, double lat, double lng) {
+        this.device = device;
         this.dateTime = dateTime;
         this.type = type;
         this.lat = lat;
@@ -86,5 +92,13 @@ public class Event implements Serializable {
 
     public void setDispatcher(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 }

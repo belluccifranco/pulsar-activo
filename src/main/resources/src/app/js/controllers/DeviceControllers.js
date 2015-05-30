@@ -83,15 +83,15 @@
         ])
         .controller('newDeviceController', ['$scope', 'DeviceService', '$location',
             function($scope, DeviceService, $location) {
-                var entity = new DeviceService({
-                        name: '',
-                        imei: '',
-                        type: 'PANICBUTTON',
-                        providerType: 'PERSONAL'
-                    });
+                $scope.formData = new DeviceService({
+                    name: '',
+                    imei: '',
+                    phoneNumber: '',
+                    type: 'PANICBUTTON',
+                    providerType: null
+                });
 
                 $scope.action = 'Nuevo';
-                $scope.formData = entity;
 
                 $scope.save = function () {
                     if ($scope.form.$invalid) {
