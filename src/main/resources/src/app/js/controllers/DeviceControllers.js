@@ -68,7 +68,7 @@
                 $scope.devices = [];
 
                 DeviceService.list(
-                    { page: page},
+                    { page: page },
                     function success(response) {
                         console.log("Success:" + JSON.stringify(response));
                         $scope.devices = response.content;

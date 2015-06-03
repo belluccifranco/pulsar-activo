@@ -1,25 +1,32 @@
 <div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <ui-gmap-google-map center="map.center" control="control" zoom="map.zoom"></ui-gmap-google-map>
+    </div>
     <div class="col-xs-12 col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-bullhorn"></span> EVENTOS
-                <button class="btn btn-default btn-xs pull-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </div>
-            <div class="panel-body">
-                Eventos...
-            </div>
-        </div>
-        <div class="panel panel-default">
+        <div id="devices-panel" class="panel panel-default">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-signal"></span> DISPOSITIVOS
-                <button class="btn btn-default btn-xs pull-right">
+                <input type="text" class="form-control" placeholder="Filtro">
+                <!--<button class="btn btn-default btn-xs pull-right">
                     <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
-                </button>
+                </button>-->
             </div>
             <div class="panel-body">
-                <ul class="list-unstyled">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Imei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="device in devices">
+                        <td>{{device.name}}</td>
+                        <td>{{device.imei}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--<ul class="list-unstyled">
                     <li ng-repeat="group in groups">
                         {{ group.name }}
                         <ul>
@@ -33,11 +40,54 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul>-->
+            </div>
+        </div>
+        <div id="events-panel" class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-bullhorn"></span> EVENTOS
+                <input type="text" class="form-control" placeholder="Filtro">
+                <!--<button class="btn btn-default btn-xs pull-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>-->
+            </div>
+            <div class="panel-body">
+                Eventos...
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-8">
+</div>
+<!--
+<div class="row">
+    <div class="col-xs-12">
         <ui-gmap-google-map center="map.center" control="control" zoom="map.zoom"></ui-gmap-google-map>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Dispositivos</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Imei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="device in devices">
+                        <td>{{device.name}}</td>
+                        <td>{{device.imei}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6"></div>
+        <h3>Eventos</h3>
+    </div>
+</div>-->

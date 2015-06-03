@@ -1,5 +1,6 @@
 package com.pulsaractivo.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import com.pulsaractivo.model.Device;
 import com.pulsaractivo.service.DeviceService;
@@ -19,6 +20,12 @@ public class DeviceController {
     public DeviceController(DeviceService deviceService, DeviceRepository deviceRepository) {
         this.deviceService = deviceService;
         this.deviceRepository = deviceRepository;
+    }
+
+    @RequestMapping(value = "/devices", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Device> searchAll() {
+        return deviceRepository.findAll();
     }
 
     @RequestMapping(value = "/devices", method = RequestMethod.GET, params={"page"})

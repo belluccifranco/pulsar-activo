@@ -1,6 +1,25 @@
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+nav.navbar {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
 .angular-google-map-container {
-	height: 400px;
+	/*height: 500px;*/
 	width: 100%;
+}
+
+.angular-google-map > div {
+    height: 93vh !important;
 }
 
 .remove-margin-bottom {
@@ -22,4 +41,18 @@ th.show-header {
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+#devices-panel {
+    height: 50vh !important;
+    overflow: auto;
+}
+
+#devices-panel .panel-body {
+    padding: 0;
+}
+
+#events-panel {
+    height: 38vh !important;
+    overflow: auto;
 }
