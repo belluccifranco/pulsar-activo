@@ -1,6 +1,6 @@
 angular.module('pulsarActivo')
-    .controller('LoginController', ['$scope', '$location', 'AuthService',
-        function ($scope, $location, AuthService) {
+    .controller('LoginController', ['$scope', '$location', 'AuthService', '$http',
+        function ($scope, $location, AuthService, $http) {
 
             if (AuthService.checkCredential()) {
                 $location.path("/main");
@@ -9,32 +9,22 @@ angular.module('pulsarActivo')
             $scope.credentials = {};
 
             $scope.login = function () {
-                AuthService.login($scope.credentials)
-                    .success(function (data) {
-                        if (data.name) {
-                            AuthService.setCredential($scope.credentials.username, $scope.credentials.password);
-                            $scope.error = false;
-                            $location.path("/main");
-                        } else {
-                            AuthService.deleteCredential();
-                            $scope.error = true;
-                            $location.path("/login");
-                        }
-                    }).error(function () {
-                        AuthService.deleteCredential();
-                        $scope.error = true;
-                        $location.path("/login");
-                    });
+                AuthService.login($scope.credentials).then(function (data) {
+                    AuthService.setCredential(data);
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + data;
+                    $scope.error = false;
+                    $location.path("/main");
+                }, function (error) {
+                    AuthService.deleteCredential();
+                    $scope.error = true;
+                    $location.path("/login");
+                });
             };
 
             $scope.logout = function () {
-                AuthService.logout()
-                    .success(function () {
-                        AuthService.deleteCredential();
-                        $location.path("/");
-                    }).error(function () {
-                        AuthService.deleteCredential();
-                    });
+                $http.defaults.headers.common.Authorization = '';
+                AuthService.deleteCredential();
+                $location.path("/login");
             };
         }]);
 

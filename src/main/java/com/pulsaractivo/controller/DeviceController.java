@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class DeviceController {
+    public class DeviceController {
 
     private final DeviceService deviceService;
     private final DeviceRepository deviceRepository;
@@ -22,19 +22,19 @@ public class DeviceController {
         this.deviceRepository = deviceRepository;
     }
 
-    @RequestMapping(value = "/devices", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/devices", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Device> searchAll() {
         return deviceRepository.findAll();
     }
 
-    @RequestMapping(value = "/devices", method = RequestMethod.GET, params={"page"})
+    @RequestMapping(value = "/api/devices", method = RequestMethod.GET, params={"page"})
     @ResponseStatus(HttpStatus.OK)
     public Page<Device> searchAll(@RequestParam(value = "page", defaultValue = "1") int page) {
         return deviceService.getDevices(page);
     }
 
-    @RequestMapping(value = "/devices/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/devices/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public Device findById(@PathVariable long id) {
         Device device = deviceRepository.findOne(id);
@@ -45,7 +45,7 @@ public class DeviceController {
         return device;
     }
 
-    @RequestMapping(value = "/devices", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/devices", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public Device save(@RequestBody @Valid Device device) {
         return deviceRepository.save(device);

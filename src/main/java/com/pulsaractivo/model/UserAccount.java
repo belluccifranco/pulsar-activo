@@ -25,10 +25,6 @@ public class UserAccount implements Serializable {
     @Length(max = 250)
     private String password;
 
-    @NotEmpty
-    @Length(max = 250)
-    private String cpassword;
-
     @JoinTable(name = "userAccount_userRole",
             joinColumns = {
                     @JoinColumn(name = "id_userAccount", referencedColumnName = "id_userAccount")},
@@ -41,10 +37,9 @@ public class UserAccount implements Serializable {
     public UserAccount() {
     }
 
-    public UserAccount(String username, String password, String cpassword, List<UserRole> userRoles) {
+    public UserAccount(String username, String password, List<UserRole> userRoles) {
         this.username = username;
         this.password = password;
-        this.cpassword = cpassword;
         this.userRoles = userRoles;
     }
 
@@ -70,14 +65,6 @@ public class UserAccount implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCpassword() {
-        return cpassword;
-    }
-
-    public void setCpassword(String cpassword) {
-        this.cpassword = cpassword;
     }
 
     public List<UserRole> getUserRoles() {

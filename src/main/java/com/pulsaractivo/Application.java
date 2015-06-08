@@ -1,5 +1,6 @@
 package com.pulsaractivo;
 
+import com.pulsaractivo.controller.JwtFilter;
 import com.pulsaractivo.model.*;
 import com.pulsaractivo.repository.DeviceRepository;
 import com.pulsaractivo.repository.DispatcherRepository;
@@ -8,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
-import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,21 +27,16 @@ public class Application implements CommandLineRunner {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
+    @Bean
+    public FilterRegistrationBean jwtFilter() {
+        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(new JwtFilter());
+        registrationBean.addUrlPatterns("/api/*");
+        return registrationBean;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public Filter characterEncodingFilter() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
-    }
-
-    @Bean
-    public SecurityConfiguration applicationSecurity() {
-        return new SecurityConfiguration();
     }
 
     @Override
@@ -64,7 +59,7 @@ public class Application implements CommandLineRunner {
         System.out.println();
         System.out.println("Devices found with findAll():");
         System.out.println("-------------------------------");
-        for (Device device: deviceRepository.findAll()) {
+        for (Device device : deviceRepository.findAll()) {
             System.out.println(device);
         }
         System.out.println();
@@ -78,7 +73,7 @@ public class Application implements CommandLineRunner {
         System.out.println();
         System.out.println("Dispatchers found with findAll():");
         System.out.println("-------------------------------");
-        for (Dispatcher dispatcher: dispatcherRepository.findAll()) {
+        for (Dispatcher dispatcher : dispatcherRepository.findAll()) {
             System.out.println(dispatcher);
         }
         System.out.println();
@@ -88,7 +83,7 @@ public class Application implements CommandLineRunner {
         UserRole ADMIN_ROLE = new UserRole("ADMIN_ROLE");
         List<UserRole> roles = new ArrayList();
         roles.add(ADMIN_ROLE);
-        UserAccount userAccount = new UserAccount("admin@admin.com", "admin", "admin", roles);
+        UserAccount userAccount = new UserAccount("admin@admin.com", "admin", roles);
         List<UserAccount> accounts = new ArrayList();
         accounts.add(userAccount);
         ADMIN_ROLE.setUserAccounts(accounts);

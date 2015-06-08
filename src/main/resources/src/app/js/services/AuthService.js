@@ -3,44 +3,26 @@ angular.module('pulsarActivo')
         function ($http, $cookies) {
             return {
                 login: function (credentials) {
-                    var headers = credentials ? {
-                        authorization: "Basic " + btoa(credentials.username + ":" + credentials.password)
-                    } : {};
-                    return $http.get('/user', {headers: headers});
+                    return $http.post('/login', credentials).then(function (response) {
+                        return response.data.token;
+                    });
                 },
 
-                logout: function () {
-                    var me = this;
-                    me.deleteCredential();
-                    return $http.post('/logout', {});
-                },
-
-                setCredential: function (username, password) {
-                    $cookies.myCredential = btoa(username.concat(":", password));
-                    $cookies.username = username;
+                setCredential: function (token) {
+                    $cookies.token = token;
                 },
 
                 deleteCredential: function () {
-                    $cookies.myCredential = "";
-                    $cookies.username = "";
-                },
-
-                getUsername: function () {
-                    var username = "";
-                    var usernameInCookie = $cookies.username;
-                    if (usernameInCookie !== undefined && usernameInCookie !== "") {
-                        username = usernameInCookie;
-                    }
-                    return username;
+                    $cookies.token = "";
                 },
 
                 checkCredential: function () {
                     var isLoggedIn = false;
-                    var credentialInCookie = $cookies.myCredential;
+                    var credentialInCookie = $cookies.token;
                     if (credentialInCookie !== undefined && credentialInCookie !== "") {
                         isLoggedIn = true;
                     }
                     return isLoggedIn;
                 }
             };
-        }]);
+}]);
