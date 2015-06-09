@@ -1,28 +1,51 @@
 package com.pulsaractivo.controller;
 
-import java.util.List;
-import javax.validation.Valid;
+import com.pulsaractivo.model.Event;
 import com.pulsaractivo.model.Device;
-import com.pulsaractivo.service.DeviceService;
+import com.pulsaractivo.repository.EventRepository;
 import com.pulsaractivo.repository.DeviceRepository;
+import com.pulsaractivo.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.Valid;
+import java.util.List;
+
 
 @RestController
-public class DeviceController {
+public class EventController {
 
-    private final DeviceService deviceService;
+    private final EventService eventService;
+    private final EventRepository eventRepository;
     private final DeviceRepository deviceRepository;
 
     @Autowired
-    public DeviceController(DeviceService deviceService, DeviceRepository deviceRepository) {
-        this.deviceService = deviceService;
+    public EventController(EventService eventService, EventRepository eventRepository, DeviceRepository deviceRepository) {
+        this.eventService = eventService;
+        this.eventRepository = eventRepository;
         this.deviceRepository = deviceRepository;
     }
 
-    @RequestMapping(value = "/api/devices", method = RequestMethod.GET)
+    @RequestMapping(value = "/events/report", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public Event save(@RequestBody Event event) {
+        Device device = deviceRepository.findByImei(event.getImei());
+        try {
+        event.setDevice(device);
+        /*System.out.println(device);
+        System.out.println(event);*/
+
+            return eventRepository.save(event);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    /*@RequestMapping(value = "/api/devices", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Device> searchAll() {
         return deviceRepository.findAll();
@@ -49,5 +72,5 @@ public class DeviceController {
     @ResponseStatus(HttpStatus.OK)
     public Device save(@RequestBody @Valid Device device) {
         return deviceRepository.save(device);
-    }
+    }*/
 }

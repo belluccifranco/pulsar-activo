@@ -20,18 +20,19 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private LocalDate dateTime;
+    private String imei;
+    private LocalDate dateTime = LocalDate.now();
     @Enumerated(EnumType.STRING)
     private EventType type;
     private double lat;
     private double lng;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id_dispatcher", referencedColumnName = "id")
+    @JoinColumn(name = "id_dispatcher", referencedColumnName = "id", nullable = true)
     private Dispatcher dispatcher;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id_device", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_device", referencedColumnName = "id", nullable = true)
     private Device device;
 
     protected Event() {
@@ -52,6 +53,15 @@ public class Event implements Serializable {
 
     public long getId() {
         return id;
+    }
+
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 
     public LocalDate getDateTime() {
