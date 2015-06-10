@@ -3,6 +3,7 @@ package com.pulsaractivo.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import com.pulsaractivo.model.DeviceType;
 import com.pulsaractivo.model.ProviderType;
 import com.pulsaractivo.model.Event;
 import com.pulsaractivo.model.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Device implements Serializable {
@@ -34,7 +36,8 @@ public class Device implements Serializable {
     @Enumerated(EnumType.STRING)
     private ProviderType providerType;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "device")
+    @JsonIgnore
+    @OneToMany(mappedBy = "device")
     private List<Event> events;
 
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -116,4 +119,30 @@ public class Device implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public void addEvent(Event event) {
+        if (event.getDevice() == null) {
+            event.setDevice(this);
+        }
+
+        if (!this.events.contains(event)) {
+            this.events.add(event);
+        }
+    }
+
+    /*public Event getLastEvent() {
+        Iterator<Event> iterator = this.events.iterator();
+        Event maxDateTimeEvent = null;
+        while (iterator.hasNext()) {
+            Event event = iterator.next();
+            if (maxDateTimeEvent == null) {
+                maxDateTimeEvent = event;
+            } else {
+                if (event.getDateTime().isAfter(maxDateTimeEvent.getDateTime())) {
+                    maxDateTimeEvent = event;
+                }
+            }
+        }
+        return maxDateTimeEvent;
+    }*/
 }
