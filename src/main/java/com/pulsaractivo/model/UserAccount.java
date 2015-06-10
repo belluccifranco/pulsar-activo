@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class UserAccount implements Serializable {
@@ -25,22 +24,12 @@ public class UserAccount implements Serializable {
     @Length(max = 250)
     private String password;
 
-    @JoinTable(name = "userAccount_userRole",
-            joinColumns = {
-                    @JoinColumn(name = "id_userAccount", referencedColumnName = "id_userAccount")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "id_userRole", referencedColumnName = "id_userRole")})
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<UserRole> userRoles;
-
-
     public UserAccount() {
     }
 
-    public UserAccount(String username, String password, List<UserRole> userRoles) {
+    public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
-        this.userRoles = userRoles;
     }
 
     public long getId() {
@@ -65,14 +54,6 @@ public class UserAccount implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
     }
 
     @Override

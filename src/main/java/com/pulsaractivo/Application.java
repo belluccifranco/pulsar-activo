@@ -48,7 +48,9 @@ public class Application implements CommandLineRunner {
         addSomeDevices();
 
         //save a new userAccount and a new Role
-        addSomeUserAccountsAndRoles();
+        addSomeUserAccounts();
+
+        addSomeEventWithDevice();
     }
 
     private void addSomeDevices() {
@@ -79,17 +81,13 @@ public class Application implements CommandLineRunner {
         System.out.println();
     }
 
-    private void addSomeUserAccountsAndRoles() {
-        UserRole ADMIN_ROLE = new UserRole("ADMIN_ROLE");
-        List<UserRole> roles = new ArrayList();
-        roles.add(ADMIN_ROLE);
-        UserAccount userAccount = new UserAccount("admin@admin.com", "admin", roles);
-        List<UserAccount> accounts = new ArrayList();
-        accounts.add(userAccount);
-        ADMIN_ROLE.setUserAccounts(accounts);
+    private void addSomeUserAccounts() {
+        UserAccount userAccount = new UserAccount("admin@admin.com", "admin");
         userAccountRepository.save(userAccount);
-
         System.out.println(userAccount);
-        System.out.println(ADMIN_ROLE);
+    }
+
+    private void addSomeEventWithDevice() {
+
     }
 }

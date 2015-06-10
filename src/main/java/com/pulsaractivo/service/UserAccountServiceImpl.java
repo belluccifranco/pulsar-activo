@@ -21,4 +21,13 @@ public class UserAccountServiceImpl implements UserAccountService {
     public UserAccount getUserAccountByUsername(String username) {
         return accountRepository.findByUsernameIgnoreCase(username);
     }
+
+    @Override
+    public boolean validateUserAccount(UserAccount userAccount) {
+        UserAccount ua = this.getUserAccountByUsername(userAccount.getUsername());
+        if (ua != null && ua.getPassword().equals(userAccount.getPassword())) {
+            return true;
+        }
+        return false;
+    }
 }

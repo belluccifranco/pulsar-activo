@@ -24,9 +24,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public LoginResponse login(@RequestBody final UserAccount credentials) throws ServletException {
-        UserAccount userAccount = userAccountService.getUserAccountByUsername(credentials.getUsername());
-        if (credentials.getUsername() == null || userAccount == null) {
+    public LoginResponse login(@RequestBody final UserAccount userAccount) throws ServletException {
+        if (!userAccountService.validateUserAccount(userAccount)) {
             throw new ServletException("Invalid login");
         }
 
