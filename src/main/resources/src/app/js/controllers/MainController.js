@@ -1,75 +1,34 @@
 (function () {
     'use strict';
 
-    var devices = {
-            1: {
-                id: 1,
-                name: 'Caminante 01'
-            },
-            2: {
-                id: 2,
-                name: 'Caminante 05'
-            },
-            3: {
-                id: 3,
-                name: 'Caminante 08'
-            },
-            4: {
-                id: 4,
-                name: 'Caminante 09'
-            },
-            5: {
-                id: 5,
-                name: 'Caminante 10'
-            },
-            6: {
-                id: 6,
-                name: 'EMI 01'
-            },
-            7: {
-                id: 7,
-                name: 'EMI 04'
-            },
-            8: {
-                id: 8,
-                name: 'EMI 08'
-            }
-        },
-        fleets = {
-            1: {
-                id: 1,
-                name: 'Caminantes Resistencia',
-                devices: [devices[1], devices[2], devices[3], devices[4], devices[5]]
-            },
-            2: {
-                id: 2,
-                name: 'EMI',
-                devices: [devices[6], devices[7], devices[8]]
-            }
-        },
-        groups = {
-            1: {
-                id: 1,
-                name: '911 Policía del Chaco',
-                fleets: [fleets[1]]
-            },
-            2: {
-                id: 2,
-                name: 'Municipalidad de Resistencia',
-                fleets: [fleets[2]]
-            }
-        };
-
     angular.module('pulsarActivo')
-        .controller('MainController', ['$scope', 'uiGmapGoogleMapApi', 'DeviceService',
-            function ($scope, uiGmapGoogleMapApi, DeviceService) {
-                //$scope.groups = groups;
-                $scope.map = {center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
+        .controller('MainController', ['$scope', 'uiGmapGoogleMapApi', 'DeviceService', 'socket', 'uiGmapIsReady',
+            function ($scope, uiGmapGoogleMapApi, DeviceService, socket, uiGmapIsReady) {
+                $scope.events = [];
 
+                /*-- Socket --------------------------------------------------------------------*/
+                socket.forward('eventreport', $scope);
+                $scope.$on('socket:eventreport', function (ev, data) {
+                  var event = JSON.parse(data),
+                      m = findMarkerById(event.device.id);
+
+                  console.log(m);
+
+                  //add event to events list
+                  $scope.events.unshift(event);
+
+                  //update device
+
+                  //update marker position
+                  m.latitude = event.lat;
+                  m.longitude = event.lng;
+                });
+
+                /*-- Device -------------------------------------------------------------------*/
                 DeviceService.listAll(
                     {},
                     function success(response) {
-                        console.log("Success:" + JSON.stringify(response));
+                        //console.log("Success:" + JSON.stringify(response));
                         $scope.devices = response;
                     },
                     function error(errorResponse) {
@@ -77,8 +36,79 @@
                     }
                 );
 
-                uiGmapGoogleMapApi.then(function (maps) {
 
+                /*-- Maps ---------------------------------------------------------------------*/
+                $scope.map = {control: {}, markerControl: {}, center: {latitude: -27.4856987, longitude: -58.8023838}, zoom: 13};
+                $scope.markers = [];
+
+                $scope.markersEvents = {
+                    'click': function(gm, eName, m) {
+                        _.each($scope.markers, function(mker) {
+                            if (mker.id !== m.id) {
+                                mker.show = false;
+                            }
+                        });
+                        m.show = true;
+                    }
+                }
+
+                function findMarkerById(id) {
+                    var i;
+                    for (i=0; i < $scope.markers.length; i +=1) {
+                        if ($scope.markers[i].id == id) {
+                            return $scope.markers[i];
+                        }
+                    }
+
+                    return null;
+                }
+
+                function findGMapMarkerById(id) {
+                    var i, gmarkers = $scope.map.markerControl.getGMarkers();
+                    for (i=0; i < gmarkers.length; i +=1) {
+                        if (gmarkers[i].model.id == id) {
+                            return gmarkers[i];
+                        }
+                    }
+
+                    return null;
+                }
+
+                $scope.showDeviceInMaps = function (device) {
+                    var m = findMarkerById(device.id),
+                        gmarker = findGMapMarkerById(device.id);
+
+                    $scope.map.center.latitude = m.latitude;
+                    $scope.map.center.longitude = m.longitude;
+                    $scope.map.zoom = 15;
+
+                    google.maps.event.trigger(gmarker, 'click');
+                }
+
+                uiGmapGoogleMapApi.then(function (maps) {
+                    function createMarker(device) {
+                        return {
+                            latitude: device.lat,
+                            longitude: device.lng,
+                            title: device.name,
+                            id: device.id,
+                            type: device.type,
+                            icon: device.type === 'AVL' ? '/images/car.png' : '/images/phones.png'
+                        }
+                    }
+
+                    function showDevicesPositions() {
+                        var i, markers = [];
+                        for (i = 0; i < $scope.devices.length; i += 1) {
+                            markers.push(createMarker($scope.devices[i]));
+                        }
+
+                        $scope.markers = markers;
+                    }
+
+                    uiGmapIsReady.promise(1).then(function(instances) {
+                        showDevicesPositions();
+                    });
                 });
             }]);
 }());

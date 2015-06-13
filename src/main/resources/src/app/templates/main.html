@@ -1,58 +1,72 @@
 <div class="row">
     <div class="col-xs-12 col-sm-8">
-        <ui-gmap-google-map center="map.center" control="control" zoom="map.zoom"></ui-gmap-google-map>
+        <ui-gmap-google-map center="map.center" control="map.control" zoom="map.zoom">
+            <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markersEvents"  control="map.markerControl">
+                <ui-gmap-windows show="show">
+                    <div ng-non-bindable>
+                        <h4>{{title}}</h4>
+                        <p>{{type}}</p>
+                    </div>
+                </ui-gmap-windows>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
     </div>
     <div class="col-xs-12 col-sm-4">
         <div id="devices-panel" class="panel panel-default">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-signal"></span> DISPOSITIVOS
-                <input type="text" class="form-control" placeholder="Filtro">
+                <input type="text" class="form-control" ng-model="deviceFilter" placeholder="Filtro">
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="width: 35px;"></th>
+                        <th>Nombre</th>
+                        <th>Imei</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="device-row" ng-repeat="device in devices | filter:deviceFilter"  ng-click="showDeviceInMaps(device)">
+                        <td class="text-center"><img src="{{device.type === 'AVL' ? '/images/car-info.png' : '/images/phones-info.png'}}"></td>
+                        <td>{{device.name}}</td>
+                        <td>{{device.imei}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="events-panel" class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-bullhorn"></span> EVENTOS
+                <input type="text" class="form-control" ng-model="eventFilter" placeholder="Filtro">
                 <!--<button class="btn btn-default btn-xs pull-right">
-                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
                 </button>-->
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Imei</th>
+                        <th>Tipo</th>
+                        <th>Device</th>
+                        <th class="nowrap">Fecha - hora</th>
+                        <th>lat</th>
+                        <th>lng</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="device in devices">
-                        <td>{{device.name}}</td>
-                        <td>{{device.imei}}</td>
+                    <tr ng-repeat="event in events | filter:eventFilter">
+                        <td>{{event.type === 'POSITIONUPDATE' ? 'PU' : 'A'}}</td>
+                        <td>{{event.device.name}}</td>
+                        <td class="nowrap">
+                            {{event.dateTime.dayOfMonth}}/{{event.dateTime.monthValue}}/{{event.dateTime.year}}
+                        </td>
+                        <td>{{event.lat}}</td>
+                        <td>{{event.lng}}</td>
                     </tr>
                     </tbody>
                 </table>
-                <!--<ul class="list-unstyled">
-                    <li ng-repeat="group in groups">
-                        {{ group.name }}
-                        <ul>
-                            <li ng-repeat="fleet in group.fleets">
-                                {{ fleet.name }}
-                                <ul>
-                                    <li ng-repeat="device in fleet.devices">
-                                        {{ device.name }}
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>-->
-            </div>
-        </div>
-        <div id="events-panel" class="panel panel-default">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-bullhorn"></span> EVENTOS
-                <input type="text" class="form-control" placeholder="Filtro">
-                <!--<button class="btn btn-default btn-xs pull-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>-->
-            </div>
-            <div class="panel-body">
-                Eventos...
             </div>
         </div>
     </div>

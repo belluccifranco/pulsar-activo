@@ -56,3 +56,22 @@ th.show-header {
     height: 38vh !important;
     overflow: auto;
 }
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.device-row {
+    cursor: pointer;
+}
+
+#iw-container  .iw-title {
+   font-size: 16px;
+   font-weight: 400;
+   padding: 10px;
+   background-color: #48b5e9;
+   color: white;
+   margin: 1px;
+   border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+

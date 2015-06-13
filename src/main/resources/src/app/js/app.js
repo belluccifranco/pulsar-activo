@@ -1,9 +1,9 @@
-angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoogle-maps' /*,'btford.socket-io'*/])
-    /*.factory('socket', function (socketFactory) {
-     return socketFactory({
-     ioSocket: io.connect('http://localhost:3000')
-     });
-     })*/
+angular.module('pulsarActivo', ['ngRoute', 'ngResource', 'ngCookies', 'uiGmapgoogle-maps' ,'btford.socket-io'])
+    .factory('socket', function (socketFactory) {
+         return socketFactory({
+            ioSocket: io.connect('http://' + location.hostname + ':3000')
+         });
+     })
     .filter('range', function () {
         return function (input, total) {
             total = parseInt(total);

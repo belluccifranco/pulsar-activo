@@ -3,6 +3,7 @@ package com.pulsaractivo.controller;
 import java.util.List;
 import javax.validation.Valid;
 import com.pulsaractivo.model.Device;
+import com.pulsaractivo.model.Event;
 import com.pulsaractivo.service.DeviceService;
 import com.pulsaractivo.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,20 @@ public class DeviceController {
     public DeviceController(DeviceService deviceService, DeviceRepository deviceRepository) {
         this.deviceService = deviceService;
         this.deviceRepository = deviceRepository;
+    }
+
+
+    @RequestMapping(value = "/api/devices/{id}/events/last", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Event findDeviceLastEvent(@PathVariable long id) {
+        /*Device device = deviceRepository.findOne(id);
+        if (device == null) {
+            //throw error entity not found.
+        }
+        System.out.println(device);*/
+        Event event = deviceService.getDeviceLastEvent(id);
+
+        return event;
     }
 
     @RequestMapping(value = "/api/devices", method = RequestMethod.GET)
@@ -50,4 +65,6 @@ public class DeviceController {
     public Device save(@RequestBody @Valid Device device) {
         return deviceRepository.save(device);
     }
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +28,13 @@ public class Application implements CommandLineRunner {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    @Bean
+    /*@Bean
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new JwtFilter());
         registrationBean.addUrlPatterns("/api/*");
         return registrationBean;
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -54,9 +55,18 @@ public class Application implements CommandLineRunner {
     }
 
     private void addSomeDevices() {
-        deviceRepository.save(new Device("490154203237518", "Device1", DeviceType.PANICBUTTON));
-        deviceRepository.save(new Device("375235354514525", "Device2", DeviceType.AVL));
-        deviceRepository.save(new Device("943202934893509", "Device3", DeviceType.PANICBUTTON));
+        Device device1 = new Device("490154203237518", "Device1", DeviceType.PANICBUTTON);
+        device1.addEvent(new Event(device1, LocalDate.now(), EventType.POSITIONUPDATE, -27.471847, -58.840307));
+
+        Device device2 = new Device("375235354514525", "Device2", DeviceType.AVL);
+        device2.addEvent(new Event(device2, LocalDate.now(), EventType.POSITIONUPDATE, -27.463613, -58.830598));
+
+        Device device3 = new Device("943202934893509", "Device3", DeviceType.PANICBUTTON);
+        device3.addEvent(new Event(device3, LocalDate.now(), EventType.POSITIONUPDATE, -27.476826, -58.855360));
+
+        deviceRepository.save(device1);
+        deviceRepository.save(device2);
+        deviceRepository.save(device3);
 
         System.out.println();
         System.out.println("Devices found with findAll():");

@@ -30,6 +30,9 @@ public class Device implements Serializable {
     private String name;
     private String phoneNumber;
 
+    private double lat = 0;
+    private double lng = 0;
+
     @Enumerated(EnumType.STRING)
     private DeviceType type;
 
@@ -37,7 +40,7 @@ public class Device implements Serializable {
     private ProviderType providerType;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "device")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "device")
     private List<Event> events;
 
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -57,7 +60,7 @@ public class Device implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s [%s]", name, imei);
+        return String.format("%s [%s] (%s)", name, imei, Long.toString(id));
     }
 
     public long getId() {
@@ -127,22 +130,26 @@ public class Device implements Serializable {
 
         if (!this.events.contains(event)) {
             this.events.add(event);
+            this.setLat(event.getLat());
+            this.setLng(event.getLng());
         }
     }
 
-    /*public Event getLastEvent() {
-        Iterator<Event> iterator = this.events.iterator();
-        Event maxDateTimeEvent = null;
-        while (iterator.hasNext()) {
-            Event event = iterator.next();
-            if (maxDateTimeEvent == null) {
-                maxDateTimeEvent = event;
-            } else {
-                if (event.getDateTime().isAfter(maxDateTimeEvent.getDateTime())) {
-                    maxDateTimeEvent = event;
-                }
-            }
-        }
-        return maxDateTimeEvent;
-    }*/
+    //Temporales hasta que haya otra manera
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
 }

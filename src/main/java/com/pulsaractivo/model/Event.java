@@ -31,7 +31,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "id_dispatcher", referencedColumnName = "id", nullable = true)
     private Dispatcher dispatcher;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_device", referencedColumnName = "id", nullable = true)
     private Device device = null;
 
