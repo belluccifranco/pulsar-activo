@@ -88,7 +88,7 @@
                     imei: '',
                     phoneNumber: '',
                     type: 'PANICBUTTON',
-                    providerType: null
+                    carrier: null
                 });
 
                 $scope.action = 'Nuevo';

@@ -1,6 +1,6 @@
 package com.pulsaractivo.model;
 
-public enum ProviderType {
+public enum Carrier {
     CLARO,
     PERSONAL,
     MOVISTAR

@@ -1,24 +1,11 @@
 package com.pulsaractivo.model;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
-import com.pulsaractivo.model.DeviceType;
-import com.pulsaractivo.model.ProviderType;
-import com.pulsaractivo.model.Event;
-import com.pulsaractivo.model.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Device implements Serializable {
@@ -37,7 +24,7 @@ public class Device implements Serializable {
     private DeviceType type;
 
     @Enumerated(EnumType.STRING)
-    private ProviderType providerType;
+    private Carrier carrier;
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "device")
@@ -99,12 +86,12 @@ public class Device implements Serializable {
         this.type = type;
     }
 
-    public ProviderType getProviderType() {
-        return providerType;
+    public Carrier getCarrier() {
+        return carrier;
     }
 
-    public void setProviderType(ProviderType providerType) {
-        this.providerType = providerType;
+    public void setCarrier(Carrier carrier) {
+        this.carrier = carrier;
     }
 
     public List<Event> getEvents() {
@@ -134,6 +121,8 @@ public class Device implements Serializable {
             this.setLng(event.getLng());
         }
     }
+
+
 
     //Temporales hasta que haya otra manera
     public double getLat() {
