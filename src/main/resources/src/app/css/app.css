@@ -22,6 +22,14 @@ nav.navbar {
     height: 93vh !important;
 }
 
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
 .remove-margin-bottom {
 	margin-bottom: 0;
 }

@@ -4,15 +4,16 @@
     angular.module('pulsarActivo')
         .controller('MainController', ['$scope', 'uiGmapGoogleMapApi', 'DeviceService', 'socket', 'uiGmapIsReady',
             function ($scope, uiGmapGoogleMapApi, DeviceService, socket, uiGmapIsReady) {
+                var $alertsModal = $('#myModal').modal({ show: false });
+
                 $scope.events = [];
+                $scope.alerts = [];
 
                 /*-- Socket --------------------------------------------------------------------*/
                 socket.forward('eventreport', $scope);
                 $scope.$on('socket:eventreport', function (ev, data) {
                   var event = JSON.parse(data),
                       m = findMarkerById(event.device.id);
-
-                  console.log(m);
 
                   //add event to events list
                   $scope.events.unshift(event);
@@ -22,6 +23,11 @@
                   //update marker position
                   m.latitude = event.lat;
                   m.longitude = event.lng;
+
+                  if (event.type === 'ALERT') {
+                    $scope.alerts.push(event);
+                    $alertsModal.modal('show');
+                  }
                 });
 
                 /*-- Device -------------------------------------------------------------------*/
