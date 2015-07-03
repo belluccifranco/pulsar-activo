@@ -1,9 +1,9 @@
 angular.module('pulsarActivo')
-    .controller('LoginController', ['$scope', '$location', 'AuthService', '$http',
-        function ($scope, $location, AuthService, $http) {
+    .controller('LoginController', ['$scope', '$state', 'AuthService', '$http',
+        function ($scope, $state, AuthService, $http) {
 
             if (AuthService.checkCredential()) {
-                $location.path("/main");
+                $state.go('main');
             }
 
             $scope.credentials = {};
@@ -13,20 +13,17 @@ angular.module('pulsarActivo')
                     AuthService.setCredential(data);
                     $http.defaults.headers.common.Authorization = 'Bearer ' + data;
                     $scope.error = false;
-                    $location.path("/main");
+                    $state.go("main");
                 }, function (error) {
                     AuthService.deleteCredential();
                     $scope.error = true;
-                    $location.path("/login");
+                    $state.go("login");
                 });
             };
 
             $scope.logout = function () {
                 $http.defaults.headers.common.Authorization = '';
                 AuthService.deleteCredential();
-                $location.path("/login");
+                $state.go("login");
             };
         }]);
-
-
-

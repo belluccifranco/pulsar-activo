@@ -17,5 +17,10 @@
     "grunt-contrib-cssmin": "^0.12.2",
     "grunt-contrib-uglify": "^0.8.1",
     "grunt-contrib-watch": "^0.6.1"
+  },
+  "jshintConfig": {
+    "globals": {
+      "angular": false
+    }
   }
 }

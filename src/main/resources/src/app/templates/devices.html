@@ -1,7 +1,7 @@
 <h1>Dispositivos</h1>
 
 <ul class="list-inline pull-right">
-    <li><a href="#/device/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nuevo Dispositivo</a></li>
+    <li><a ui-sref="newdevice" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nuevo Dispositivo</a></li>
 </ul>
 <table class="table table-bordered table-condensed remove-margin-bottom">
     <thead>
@@ -18,8 +18,8 @@
         <td>{{device.imei}}</td>
         <td>{{device.type}}</td>
         <td class="text-center">
-            <a class="btn btn-default" href="#/device/{{device.id}}/show"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
-            <a class="btn btn-default" href="#/device/{{device.id}}/edit"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+            <a class="btn btn-default" ui-sref="showdevice({ id: device.id })"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+            <a class="btn btn-default" ui-sref="editdevice({ id: device.id })"><span class="glyphicon glyphicon-edit"></span> Editar</a>
         </td>
     </tr>
     </tbody>
@@ -28,13 +28,13 @@
 <nav>
     <ul class="pagination">
         <li ng-class="{disabled: page<=1}">
-            <a href="#/devices/{{ (1 * page - 1) < 1 ? 1 : (1 * page - 1)}}" aria-label="Anterior">
+            <a ui-sref="devices({ page: (1 * page - 1) < 1 ? 1 : (1 * page - 1) })" aria-label="Anterior">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li ng-class="{active: $index+1 == page}" ng-repeat="n in [] | range:totalPages"><a href="#/devices/{{$index+1}}">{{$index+1}}</a></li>
+        <li ng-class="{active: $index+1 == page}" ng-repeat="n in [] | range:totalPages"><a ui-sref="devices({ page: $index+1 })">{{$index+1}}</a></li>
         <li ng-class="{disabled: page>=totalPages}">
-            <a href="#/devices/{{ (1 * page + 1) > totalPages ? totalPages : (1 * page + 1) }}" aria-label="Siguiente">
+            <a ui-sref="devices({ page: (1 * page + 1) > totalPages ? totalPages : (1 * page + 1) })" aria-label="Siguiente">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

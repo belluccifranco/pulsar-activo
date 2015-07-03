@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" ng-app="pulsarActivo">
 <head>
+    <base href="/">
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,11 +15,8 @@
 
 	<script type="text/javascript">
 		(function(){
-			var src = encodeURI([
-			        'http://',
-					location.hostname,
-					':3000/socket.io/socket.io.js'
-				].join('')),
+			'use strict';
+			var src = encodeURI([ 'http://', location.hostname, ':3000/socket.io/socket.io.js'].join('')),
                 fileref=document.createElement('script');
 
 			fileref.setAttribute("type","text/javascript");
@@ -32,14 +30,14 @@
 
 	<div class="container-fluid">
         <ng-include src="'templates/menu.html'"></ng-include>
-        <div ng-view></div>
+        <div ui-view></div>
 	</div>
 
 	<!-- Trird party JS libraries -->
 	<script type="text/javascript" src="js/libs/jquery.js"></script>
 	<script type="text/javascript" src="js/libs/bootstrap.js"></script>
 	<script type="text/javascript" src="js/libs/angular.js"></script>
-	<script type="text/javascript" src="js/libs/angular-route.js"></script>
+	<script type="text/javascript" src="js/libs/angular-ui-router.js"></script>
 	<script type="text/javascript" src="js/libs/angular-resource.js"></script>
 	<script type="text/javascript" src="js/libs/angular-cookies.js"></script>
 	<script type="text/javascript" src="js/libs/lodash.js"></script>

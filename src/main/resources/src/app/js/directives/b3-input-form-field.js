@@ -16,5 +16,5 @@ angular.module('pulsarActivo')
                     $scope[$scope.field].$setDirty();
                 });
             }
-        }
-    })
+        };
+    });

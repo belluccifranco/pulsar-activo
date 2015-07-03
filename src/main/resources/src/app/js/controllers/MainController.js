@@ -56,7 +56,7 @@
                         });
                         m.show = true;
                     }
-                }
+                };
 
                 function findMarkerById(id) {
                     var i;
@@ -89,7 +89,7 @@
                     $scope.map.zoom = 15;
 
                     google.maps.event.trigger(gmarker, 'click');
-                }
+                };
 
                 uiGmapGoogleMapApi.then(function (maps) {
                     function createMarker(device) {
@@ -100,7 +100,7 @@
                             id: device.id,
                             type: device.type,
                             icon: device.type === 'AVL' ? '/images/car.png' : '/images/phones.png'
-                        }
+                        };
                     }
 
                     function showDevicesPositions() {
